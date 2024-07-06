@@ -11,9 +11,9 @@ function App() {
   return (
     <div className="App">
       <Person name = "Md. Sabbir Hosen" job = "Software Engineer" company = "Amazon" ></Person>
-      <Products product = {products[0]} ></Products>
-      <Products product = {products[1]} ></Products>
-      <Products product = {products[2]} ></Products>
+      {
+        products.map(product => <Products product = {product}></Products>)
+      }
     </div>
   );
 }
