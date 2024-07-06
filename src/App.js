@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
@@ -16,6 +16,9 @@ function App() {
       {
         products.map(product => <Products product = {product}></Products>)
       }
+      <div>
+      <Users></Users>
+      </div>
     </div>
   );
 }
@@ -90,6 +93,26 @@ function Counter () {
       <h1>Count: {count} </h1>
       <button className="increase-button" style = {IncreaseButtonStyle} onClick = {() => setCount(count + 1)}>Increase</button>
       <button className="decrease-button" style = {DecreaseButtonStyle} onClick = {() => setCount(count - 1)}>Decrease</button>
+    </div>
+  );
+}
+
+function Users () {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data => setUsers(data));
+  },[]);
+
+  return (
+    <div className="user-container">
+      <h1>Total Users: {users.length}</h1>
+      <ul>
+        {
+          users.map(user => <li>{user.name}</li>)
+        }
+      </ul>
     </div>
   );
 }
